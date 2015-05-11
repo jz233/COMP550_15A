@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 
 /**
- * Spring MVC Controller Class
+ * Spring MVC Controller 
  * @author DouJ
  *
  */
