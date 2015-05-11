@@ -16,7 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-
+/**
+ * Spring MVC Controller Class
+ * @author DouJ
+ *
+ */
 @Controller
 public class TestController {
 	
