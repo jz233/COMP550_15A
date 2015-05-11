@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context-2.5.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+           http://www.springframework.org/schema/task 
+           http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+
+	<context:component-scan base-package="org.comp550.schoolbus" />
+	
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+	<!-- ============================================== -->
+	<!-- 引入jdbcTemplate 两种方案：构造器，setter -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	
+	<!-- ============================================== -->
+	<bean name="applicationContextUtil" class="org.comp550.schoolbus.utils.ApplicationContextUtil"></bean>
+	<!-- 
+	<bean id="getLocation" class="org.comp550.schoolbus.job.GetLocation" scope="singleton">
+		<property name="appContextUtil" ref="applicationContextUtil"></property>
+	</bean>
+	
+	Spring Task
+	<task:scheduled-tasks>
+		<task:scheduled ref="getLocation" method="execute" cron="0/5 * * * * *" />
+	</task:scheduled-tasks>
+ -->
+	<bean id="SchoolBusDao" class="org.comp550.schoolbus.dao.impl.SchoolBusDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	<bean id="TripHasUserDao" class="org.comp550.schoolbus.dao.impl.TripHasUserDaoImpl" >
+		<property name="dataSource">
+			<ref bean="dataSource"/>
+		</property>
+	</bean>
+	
+	
+		
+</beans>

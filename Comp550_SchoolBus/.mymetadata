@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="Comp550_SchoolBus"
+  id="myeclipse.1430288171838"
+  context-root="/Comp550_SchoolBus"
+  j2ee-spec="5.0"
+  archive="Comp550_SchoolBus.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
